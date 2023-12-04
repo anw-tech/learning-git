@@ -5,8 +5,15 @@
 
 name: Second-pipeline
 
-trigger: 
-- main
+trigger:
+- none
+resources:
+  pipelines:
+  - pipeline: secondpipeline # Name of the pipeline resource.
+    source: imagebuildandpush # The name of the pipeline referenced by this pipeline resource.
+    trigger: 
+     branches:
+     - master
 
 pool:
   vmImage: ubuntu-latest
