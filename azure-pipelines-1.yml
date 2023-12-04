@@ -10,7 +10,7 @@ trigger: none
 resources:
  pipelines:
  -pipeline: previous-pipeline-trigger
-  source: azure-pipelines-1.yaml
+  source: azure-pipelines.yml
   trigger: true
 
 pool:
