@@ -5,8 +5,7 @@
 
 name: Second-pipeline
 
-trigger:
-- none
+trigger: none
 
 resources:
  pipeline: previous-pipeline-trigger
