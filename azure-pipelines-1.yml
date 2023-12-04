@@ -26,6 +26,7 @@ steps:
     namespace: 'default'
     command: 'apply'
     useConfigurationFile: true
+    imagePullPolicy: ifnotavailable
     configuration: 'Deployment_files/deployment.yaml'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
