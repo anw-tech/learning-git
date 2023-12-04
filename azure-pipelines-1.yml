@@ -5,14 +5,7 @@
 
 name: Second-pipeline
 
-trigger: none
-
-resources:
-  pipelines:
-  - pipeline: first-pipeline
-    source: azure-pipelines
-    project: saiteja-project
-    trigger: true
+trigger: main
 
 pool:
   vmImage: ubuntu-latest
