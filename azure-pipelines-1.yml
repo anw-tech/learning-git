@@ -5,7 +5,8 @@
 
 name: Second-pipeline
 
-trigger: main
+trigger: 
+- main
 
 pool:
   vmImage: ubuntu-latest
