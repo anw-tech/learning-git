@@ -8,9 +8,10 @@ name: Second-pipeline
 trigger: none
 
 resources:
- pipeline: previous-pipeline-trigger
- source: azure-pipeline.yaml
- trigger: true
+ pipelines:
+ -pipeline: previous-pipeline-trigger
+  source: azure-pipeline.yaml
+  trigger: true
 
 pool:
   vmImage: ubuntu-latest
