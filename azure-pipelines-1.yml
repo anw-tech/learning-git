@@ -11,6 +11,7 @@ resources:
  pipelines:
  -pipeline: previous-pipeline-trigger
   source: azure-pipelines.yml
+  project: saiteja-project
   trigger: true
 
 pool:
