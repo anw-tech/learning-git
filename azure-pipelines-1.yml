@@ -9,7 +9,7 @@ trigger: none
 
 resources:
   pipelines:
-  - pipeline: saiteja-project-pipelinetrigger
+  - pipeline: firstpipeline-trigger
     source: azure-pipelines
     project: saiteja-project
     trigger: true
