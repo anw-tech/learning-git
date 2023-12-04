@@ -9,7 +9,7 @@ trigger: none
 
 resources:
   pipelines:
-  - pipeline: build and push to ACR 
+  - pipeline: saiteja-project-pipelinetrigger
     source: azure-pipelines
     project: saiteja-project
     trigger: true
