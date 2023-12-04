@@ -15,6 +15,6 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: 'k8s-serviceconnection'
     namespace: 'default'
-    command: 'apply'
+    command: 'apply -f'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
