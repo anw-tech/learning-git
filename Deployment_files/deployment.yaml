@@ -20,7 +20,7 @@ spec:
         env:
         - name: DATABASE_URL
           value: "mongodb://mongodb-service1:27017/mydatabase"
-        imagePullPolicy: IfNotAvailable
+        imagePullPolicy: Always
       imagePullSecrets:
         - name: my-registry-secrets
 ---
