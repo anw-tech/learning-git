@@ -1,19 +1,19 @@
-apiVersion: apps/v12
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment12
+  name: myapp-deployment1
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: myapp12
+      app: myapp1
   template:
     metadata:
       labels:
-        app: myapp12
+        app: myapp1
     spec:
       containers:
-      - name: myapp12
+      - name: myapp1
         image: $(saitejacontainerregistry.azurecr.io):$(buildid)
         ports:
         - containerPort: 3000
@@ -24,23 +24,23 @@ spec:
       imagePullSecrets:
         - name: "container-registry-secret"
 ---
-apiVersion: v12
+apiVersion: v1
 kind: Service
 metadata:
-  name: myapp-service12
+  name: myapp-service1
 spec:
   selector:
-    app: myapp12
+    app: myapp1
   ports:
     - port: 80
       targetPort: 3000
       nodePort: 31000
   type: NodePort
 ---
-apiVersion: apps/v12
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment12
+  name: mongodb-deployment1
 spec:
   replicas: 1
   selector:
@@ -60,7 +60,7 @@ spec:
 apiVersion: v12
 kind: Service
 metadata:
-  name: mongodb-service12
+  name: mongodb-service1
 spec:
   selector:
     app: mongodb1
