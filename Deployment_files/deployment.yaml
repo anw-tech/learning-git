@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: myapp1
-        image: saitejacontainerregistry.azurecr.io/saitejaproject:220
+        image: saitejacontainerregistry.azurecr.io/saitejaproject
         ports:
         - containerPort: 3000
         env:
         - name: DATABASE_URL
           value: "mongodb://mongodb-service1:27017/mydatabase"
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
       imagePullSecrets:
         - name: my-registry-secrets
 ---
