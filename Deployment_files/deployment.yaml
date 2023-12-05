@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myapp1
-        image: docker.io/library/realestate:latest
+        image: saitejagurajala/realestate:latest
         ports:
         - containerPort: 3000
         env:
