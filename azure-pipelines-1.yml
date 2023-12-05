@@ -25,6 +25,7 @@ steps:
     kubernetesServiceEndpoint: 'k8s-serviceconnection'
     namespace: 'default'
     command: 'apply'
+    imagePullPolicy: Always
     useConfigurationFile: true
     configuration: 'Deployment_files/deployment.yaml'
     secretType: 'dockerRegistry'
