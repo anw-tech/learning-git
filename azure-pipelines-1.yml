@@ -26,7 +26,9 @@ steps:
     namespace: 'default'
     command: 'apply'
     useConfigurationFile: true
-    imagePullPolicy: ifnotavailable
     configuration: 'Deployment_files/deployment.yaml'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
+    azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
+    secretName: 'container-registry-secret'
