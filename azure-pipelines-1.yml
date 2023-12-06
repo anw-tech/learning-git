@@ -33,6 +33,7 @@ steps:
     enableRecursion: false
     useLegacyPattern: false
     enableTelemetry: true
+    
 - task: Kubernetes@1
   inputs:
 
