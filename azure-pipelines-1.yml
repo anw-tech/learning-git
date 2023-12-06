@@ -9,29 +9,32 @@ trigger:
 - none
 resources:
   pipelines:
-  - pipeline: secondpipeline # Name of the pipeline resource.
-    source: imagebuildandpush # The name of the pipeline referenced by this pipeline resource.
+  - pipeline: firstpipeline # Name of the pipeline resource.
+    source: First-pipeline # The name of the pipeline referenced by this pipeline resource.
     trigger: 
-     branches:
-     - master
+      branches:
+      - master
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: Kubernetes@1
-  inputs:
-    connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'k8s-serviceconnection'
-    namespace: 'default'
-    command: 'apply'
-    imagePullPolicy: Always
-    useConfigurationFile: true
-    configuration: 'Deployment_files/deployment.yaml'
-    secretType: 'dockerRegistry'
-    containerRegistryType: 'Azure Container Registry'
-    azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
-    azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
-    secretName: 'container-registry-secret'
-    containers: |
-            $(azureContainerRegistry)/$(saitejacontainerregistry.azurecr.io):$(build:buildid)
+jobs:
+- job: Deploy
+  displayName: Deploy to Kubernetes
+  steps:
+  - task: Kubernetes@1
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceEndpoint: 'k8s-serviceconnection'
+      namespace: 'default'
+      command: 'apply'
+      imagePullPolicy: Always
+      useConfigurationFile: true
+      configuration: 'Deployment_files/deployment.yaml'
+      secretType: 'dockerRegistry'
+      containerRegistryType: 'Azure Container Registry'
+      azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
+      azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
+      secretName: 'container-registry-secret'
+      containers: |
+        $(azureContainerRegistry)/saitejaproject:latest
