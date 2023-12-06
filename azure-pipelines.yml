@@ -16,7 +16,7 @@ variables:
   imageRepository: 'saitejaproject'
   containerRegistry: 'saitejacontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$build:buildid'
+  tag: '$(build:buildid)'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
