@@ -37,6 +37,3 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          latest # Tag the image with "latest" in addition to the BuildId
-          $(tag)
