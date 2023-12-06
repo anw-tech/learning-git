@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myapp1
-        image: $(saitejacontainerregistry.azurecr.io):$(buildid)
+        image: saitejacontainerregistry.azurecr.io
         ports:
         - containerPort: 3000
         env:
