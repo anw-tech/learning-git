@@ -19,8 +19,23 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+  - task: replacetokens@5
+    inputs:
+      rootDirectory: 'Deployment_files'
+      targetFiles: '**/deployment.yaml'
+      encoding: 'auto'
+      tokenPattern: 'default'
+      writeBOM: true
+      actionOnMissing: 'warn'
+      keepToken: false
+      actionOnNoFiles: 'continue'
+      enableTransforms: false
+      enableRecursion: false
+      useLegacyPattern: false
+      enableTelemetry: true
 - task: Kubernetes@1
   inputs:
+
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: 'k8s-serviceconnection'
     namespace: 'default'
