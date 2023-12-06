@@ -34,4 +34,4 @@ steps:
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
     secretName: 'container-registry-secret'
     containers: |
-           $(saitejacontainerregistry.azurecr.io)/$(saitejaproject):$tag
+           $(saitejacontainerregistry.azurecr.io)/$(saitejaproject):$(build:buildid)
