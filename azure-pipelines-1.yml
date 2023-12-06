@@ -33,5 +33,5 @@ steps:
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
     secretName: 'container-registry-secret'
-    containers: |
+    image: |
            $(saitejacontainerregistry.azurecr.io)/$(saitejaproject):$(build:buildid)
