@@ -16,7 +16,7 @@ variables:
   imageRepository: 'saitejaproject'
   containerRegistry: 'saitejacontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(build:buildid)'
+  tag: '$(Build.Buildid)'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -33,9 +33,9 @@ stages:
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
-        containerRegistry: '$(dockerRegistryServiceConnection)'
-        repository: '$(imageRepository)'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
