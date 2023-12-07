@@ -28,7 +28,7 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: 
     - latestTag=$(az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1)
-      Image_tag= latestTag
+      Image_tag= $latestTag
 
 - task: replacetokens@5
   inputs:
