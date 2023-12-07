@@ -14,11 +14,11 @@ resources:
      branches:
      - master
 
-pool:
-  vmImage: ubuntu-latest
-
 variable:
   image_tag: '${Build.BuildId}'
+  
+pool:
+  vmImage: ubuntu-latest
 
 steps:
 - task: replacetokens@5
