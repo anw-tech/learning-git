@@ -18,10 +18,18 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  Image_tag: '$Build.BuildId'
+Tag: '$(Build.BuildID)'
 
 steps:
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'saitejacontainerregistry'
+    repository: 'Saitejaproject'
+    command: 'pull'
+    Dockerfile: '**/Dockerfile'
+    tags: $'(imageTag)'
+  
 - task: replacetokens@5
   inputs:
     rootDirectory: 'Deployment_files'
@@ -49,4 +57,5 @@ steps:
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
-    secretName: 'saitejak8secret'
+    secretName: 'saitejak8secret'4
+
