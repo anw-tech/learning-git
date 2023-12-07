@@ -19,7 +19,7 @@ pool:
 
 variables:
       Image_tag: '$latestTag'
-      
+
 steps:
 - task: AzureCLI@2
   inputs:
@@ -58,4 +58,3 @@ steps:
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
     secretName: 'saitejak8secret'
-
