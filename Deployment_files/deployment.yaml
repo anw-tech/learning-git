@@ -22,7 +22,7 @@ spec:
           value: "mongodb://mongodb-service1:27017/mydatabase"
         imagePullPolicy: "Always"
       imagePullSecrets:
-        - name: "container-registry-secret"
+        - name: "saitejak8secret"
 ---
 apiVersion: v1
 kind: Service
