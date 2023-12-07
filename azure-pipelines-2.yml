@@ -27,7 +27,6 @@ steps:
     repository: 'Saitejaproject'
     command: 'pull'
     Dockerfile: '**/Dockerfile'
-    image: 'saitejacontainerregistry.azurecr.io/saitejaproject'
     tags: $'(Tag)'
 
 - task: replacetokens@5
