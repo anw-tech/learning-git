@@ -36,7 +36,7 @@ steps:
 - task: Kubernetes@1
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'k8s-serviceconnection'
+    kubernetesServiceEndpoint: 'Saitejak8serviceconnection'
     namespace: 'default'
     command: 'apply'
     useConfigurationFile: true
