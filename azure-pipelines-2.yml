@@ -58,3 +58,4 @@ steps:
     secretName: 'saitejak8secret'
     variables:
       Image_tag: '$latestTag'
+
