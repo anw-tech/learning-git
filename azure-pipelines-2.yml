@@ -17,8 +17,6 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  Image_tag: '$latestTag'
 
 steps:
 - task: AzureCLI@2
@@ -29,6 +27,10 @@ steps:
     inlineScript: 
     - latestTag=$(az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1)
       Image_tag= $latestTag
+
+variables:
+  Image_tag: '$latestTag'
+
 - task: replacetokens@5
   inputs:
     rootDirectory: 'Deployment_files'
