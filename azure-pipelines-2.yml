@@ -14,9 +14,6 @@ resources:
      branches:
      - master
 
-variable:
-  image_tag: '${Build.BuildId}'
-  
 pool:
   vmImage: ubuntu-latest
 
