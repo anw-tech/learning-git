@@ -18,7 +18,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-Tag: '$(Build.BuildID)'
+tags: '$(Build.BuildID)'
 
 steps:
 
@@ -57,5 +57,5 @@ steps:
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
-    secretName: 'saitejak8secret'4
+    secretName: 'saitejak8secret4'
 
