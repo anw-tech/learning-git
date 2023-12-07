@@ -17,7 +17,9 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
-
+variables:
+      Image_tag: '$latestTag'
+      
 steps:
 - task: AzureCLI@2
   inputs:
@@ -26,7 +28,7 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: 
     - latestTag=$(az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1)
-      Image_tag= $latestTag
+      Image_tag= latestTag
 
 - task: replacetokens@5
   inputs:
@@ -56,6 +58,4 @@ steps:
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
     secretName: 'saitejak8secret'
-    variables:
-      Image_tag: '$latestTag'
 
