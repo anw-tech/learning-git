@@ -28,7 +28,7 @@ steps:
     command: 'pull'
     Dockerfile: '**/Dockerfile'
     tags: 
-      imageTag: $'(Tag)'
+    imageTag: $'(Tag)'
 
 - task: replacetokens@5
   inputs:
