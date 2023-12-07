@@ -27,8 +27,7 @@ steps:
     repository: 'Saitejaproject'
     command: 'pull'
     Dockerfile: '**/Dockerfile'
-    tags: 
-    imageTag: $'(Tag)'
+    tags: $'(Tag)'
 
 - task: replacetokens@5
   inputs:
