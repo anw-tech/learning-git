@@ -4,8 +4,10 @@
 # https://aka.ms/yaml
 
 name: Second-pipeline
+
 trigger:
 - none
+
 resources:
   pipelines:
   - pipeline: Secondpipeline # Name of the pipeline resource.
