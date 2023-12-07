@@ -28,8 +28,9 @@ steps:
     repository: 'Saitejaproject'
     command: 'pull'
     Dockerfile: '**/Dockerfile'
-    tags: $'(imageTag)'
-  
+    tags: 
+      imageTag: $'(Build.BuildID)'
+
 - task: replacetokens@5
   inputs:
     rootDirectory: 'Deployment_files'
