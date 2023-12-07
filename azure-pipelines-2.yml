@@ -8,6 +8,9 @@ name: Second-pipeline
 trigger:
 - none
 
+variables:
+image.Tag: '$(Build.ID)'
+
 resources:
   pipelines:
   - pipeline: Secondpipeline # Name of the pipeline resource.
@@ -27,7 +30,7 @@ steps:
     repository: 'Saitejaproject'
     command: 'pull'
     Dockerfile: '**/Dockerfile'
-    tags: $'(Tag)'
+    tags: $'(imageTag)'
 
 - task: replacetokens@5
   inputs:
@@ -57,4 +60,3 @@ steps:
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
     secretName: 'saitejak8secret4'
-
