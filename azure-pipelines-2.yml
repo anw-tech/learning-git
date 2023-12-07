@@ -18,7 +18,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  Image_tag: "$(LatestTag)"
+  Image_tag: "LatestTag"
 
 steps:
 - task: AzureCLI@2
