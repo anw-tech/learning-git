@@ -39,16 +39,14 @@ steps:
     
 - task: Kubernetes@1
   inputs:
-
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: 'k8s-serviceconnection'
     namespace: 'default'
     command: 'apply'
-    imagePullPolicy: Always
     useConfigurationFile: true
     configuration: 'Deployment_files/deployment.yaml'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
-    secretName: 'container-registry-secret'
+    secretName: 'container-registry-secret1'
