@@ -26,8 +26,8 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'saitejacontainerregistry'
-    repository: 'Saitejaproject'
+    #containerRegistry: 'saitejacontainerregistry'
+    #repository: 'Saitejaproject'
     command: 'pull'
     Dockerfile: '**/Dockerfile'
     tags: $'(imageTag)'
