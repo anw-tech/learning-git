@@ -18,7 +18,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  Image_tag: "$Build:BuildID"
+  Image_tag: "$Build:BuildID1"
 
 steps:
 - task: replacetokens@5
