@@ -26,9 +26,8 @@ steps:
     azureSubscription: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 
-    - latestTag=$(az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1)
-      Image_tag= $latestTag
+    inlineScript: latestTag=$(az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1)
+
 
 - task: replacetokens@5
   inputs:
