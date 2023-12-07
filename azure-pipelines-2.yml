@@ -17,7 +17,7 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
-variable:
+Variable:
   image_tag: '${Build.BuildId}'
 
 steps:
