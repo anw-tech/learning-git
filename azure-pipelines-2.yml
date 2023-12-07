@@ -28,9 +28,6 @@ steps:
     - latestTag=$(az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1)
       Image_tag= $latestTag
 
-variables:
-  Image_tag: '$latestTag'
-
 - task: replacetokens@5
   inputs:
     rootDirectory: 'Deployment_files'
@@ -59,3 +56,5 @@ variables:
     azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
     azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
     secretName: 'saitejak8secret'
+    variables:
+      Image_tag: '$latestTag'
