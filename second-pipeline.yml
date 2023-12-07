@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  image_tag:'$(Build.BuildID)'
+
 steps:
 - task: Kubernetes@1
   inputs:
