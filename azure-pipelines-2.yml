@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: Second-pipeline
+trigger:
+- none
+resources:
+  pipelines:
+  - pipeline: Secondpipeline # Name of the pipeline resource.
+    source: imagebuildandpush # The name of the pipeline referenced by this pipeline resource.
+    trigger: 
+     branches:
+     - master
+
+pool:
+  vmImage: ubuntu-latest
+
+variable:
+  image_tag: '${Build.BuildId}'
+
+steps:
+- task: replacetokens@5
+  inputs:
+    rootDirectory: 'Deployment_files'
+    targetFiles: '**/deployment.yaml'
+    encoding: 'auto'
+    tokenPattern: 'default'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    enableRecursion: false
+    useLegacyPattern: false
+    enableTelemetry: true
+
