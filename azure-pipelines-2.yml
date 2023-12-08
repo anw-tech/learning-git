@@ -9,7 +9,7 @@ trigger:
 - none
 
 variables:
-  Tag: '$(Build.Build.ID)'
+  imageTag :'$Tag'
 
 resources:
   pipelines:
