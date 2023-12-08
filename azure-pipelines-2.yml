@@ -26,6 +26,7 @@ steps:
     script: |
       # Set the imageTag to today's date
       imageTag=$(date +"%Y%m%d")
+
 - task: replacetokens@5
   inputs:
     rootDirectory: 'Deployment_files'
