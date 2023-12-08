@@ -45,4 +45,4 @@ stages:
         repository: '$(imageRepository)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: '$(Build.SourceBranchName)-$(Build.SourceVersion)-$(Build.BuildId)-$(imageTag)'
+        tags: '$now'
