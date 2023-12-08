@@ -18,7 +18,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  Image_tag: '$(Build.BuildId)'
+  image_tag: '$(now)'
 
 steps:
 
@@ -29,7 +29,7 @@ steps:
     script: |
       # Set the Image_tag to today's date
       Image_tag=$(date +"%Y%m%d")
-      echo "##vso[task.setvariable variable=Image_tag]$Image_tag"
+      echo "##vso[task.setvariable variable=image_tag]$image_tag"
 
 - task: replacetokens@5
   inputs:
