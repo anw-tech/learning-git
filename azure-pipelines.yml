@@ -21,12 +21,14 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 
+
+stages:
+-stage: Tag assignment
 - task: Bash@3
   inputs:
   targetType: 'inline'
   script: 'now=$(date)'
-
-stages:
+  
 - stage: Build
   displayName: Build and push stage
   jobs:
