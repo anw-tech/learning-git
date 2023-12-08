@@ -45,4 +45,4 @@ stages:
         repository: '$(imageRepository)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: '$now'
+        tags: '$(imageTag)'
