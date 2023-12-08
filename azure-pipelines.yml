@@ -19,8 +19,9 @@ variables:
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
-- task: Bash@3
+  
+stages:
+ - task: Bash@3
   inputs:
     targetType: 'inline'
     script: 'now=$(date)'
