@@ -26,11 +26,11 @@ steps:
 
 - task: Docker@2
   inputs:
-    #containerRegistry: 'saitejacontainerregistry'
+    # containerRegistry: 'saitejacontainerregistry'  # Uncomment and provide your container registry if necessary
     repository: 'Saitejaproject'
     command: 'pull'
     Dockerfile: '**/Dockerfile'
-    tags: $'(imageTag)'
+    tags: '$(imageTag)' 
 
 - task: replacetokens@5
   inputs:
