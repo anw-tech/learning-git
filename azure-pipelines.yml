@@ -1,61 +1,48 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-name: Second-pipeline
+name: First-pipeline
+
 trigger:
-- none
-resources:
-  pipelines:
-  - pipeline: Secondpipeline # Name of the pipeline resource.
-    source: imagebuildandpush # The name of the pipeline referenced by this pipeline resource.
-    trigger: 
-     branches:
-     - master
+- master
 
-pool:
-  vmImage: ubuntu-latest
+resources:
+- repo: self
 
 variables:
-  Image_tag: '$(Build.BuildId)'
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'ca610e97-31ce-4f38-ab86-ec029b71eef6'
+  imageRepository: 'saitejaproject'
+  containerRegistry: 'saitejacontainerregistry.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
 
-steps:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
-- task: Bash@3
-  displayName: 'Set Image Tag and Deploy'
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Set the imageTag to today's date
-      imageTag=$(date +"%Y%m%d")
-      echo "##vso[task.setvariable variable=Image_tag]$imageTag"
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Bash@3
+      displayName: 'Set Date'
+      inputs:
+        targetType: 'inline'
+        script: |
+          now=$(date +%y%m%d)
+          echo "Setting image tag to $now"
+          echo "##vso[task.setvariable variable=imageTag]$now"
 
-- task: replacetokens@5
-  inputs:
-    rootDirectory: 'Deployment_files'
-    targetFiles: '**/deployment.yaml'
-    encoding: 'auto'
-    tokenPattern: 'default'
-    writeBOM: true
-    actionOnMissing: 'warn'
-    keepToken: false
-    actionOnNoFiles: 'continue'
-    enableTransforms: false
-    enableRecursion: false
-    useLegacyPattern: false
-    enableTelemetry: true
-
-- task: Kubernetes@1
-  inputs:
-    connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'Saitejak8serviceconnection'
-    namespace: 'default'
-    command: 'apply'
-    useConfigurationFile: true
-    configuration: 'Deployment_files/deployment.yaml'
-    secretType: 'dockerRegistry'
-    containerRegistryType: 'Azure Container Registry'
-    azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
-    azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
-    secretName: 'saitejak8secret'
+    - task: Docker@2
+      displayName: 'Build and push an image to container registry'
+      inputs:
+        containerRegistry: 'saitejacontainerregistry'
+        repository: '$(imageRepository)'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(Build.SourceBranchName)-$(Build.SourceVersion)-$(Build.BuildId)-$(imageTag)'
