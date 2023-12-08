@@ -20,7 +20,7 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-stages:
+
 - task: Bash@3
   inputs:
   targetType: 'inline'
