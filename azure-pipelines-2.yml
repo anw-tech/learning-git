@@ -17,6 +17,8 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  imageTag: '$imageTag'
 steps:
 
 - task: Bash@3
