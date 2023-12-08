@@ -1,61 +1,45 @@
-name: Second-pipeline
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+name: First-pipeline
 
 trigger:
-- none
+- master
 
 resources:
-  pipelines:
-  - pipeline: Secondpipeline
-    source: imagebuildandpush
-    trigger: 
-     branches:
-     - master
+- repo: self
 
-pool:
-  vmImage: ubuntu-latest
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'ca610e97-31ce-4f38-ab86-ec029b71eef6'
+  imageRepository: 'saitejaproject'
+  containerRegistry: 'saitejacontainerregistry.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: BuildAndPush
+- stage: Build
+  displayName: Build and push stage
   jobs:
-  - job: BuildAndPushJob
-    displayName: 'Build and Push Image'
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
     steps:
-    - script: |
-        #!/bin/bash
-        today=$(date '+%Y%m%d%H%M%S')
-        echo "##vso[task.setvariable variable=imageTag]$today"
-      displayName: 'Set Image Tag'
-
-- stage: Deploy
-  jobs:
-  - job: DeployJob
-    displayName: 'Deploy to Kubernetes'
-    steps:
-    - task: replacetokens@5
+    - task: Bash@3
+      displayName: 'Set Date'
       inputs:
-        rootDirectory: 'Deployment_files'
-        targetFiles: '**/deployment.yaml'
-        encoding: 'auto'
-        tokenPattern: 'default'
-        writeBOM: true
-        actionOnMissing: 'warn'
-        keepToken: false
-        actionOnNoFiles: 'continue'
-        enableTransforms: false
-        enableRecursion: false
-        useLegacyPattern: false
-        enableTelemetry: true
+        targetType: 'inline'
+        script: 'now=$(date)'
 
-    - task: Kubernetes@1
+    - task: Docker@2
+      displayName: 'Build and push an image to container registry'
       inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceEndpoint: 'Saitejak8serviceconnection'
-        namespace: 'default'
-        command: 'apply'
-        useConfigurationFile: true
-        configuration: 'Deployment_files/deployment.yaml'
-        secretType: 'dockerRegistry'
-        containerRegistryType: 'Azure Container Registry'
-        azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
-        azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
-        secretName: 'saitejak8secret4'
+        command: 'buildAndPush'
+        repository: '$(imageRepository)'
+        dockerfile: '$(dockerfilePath)'
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        tags: '$(now)'
