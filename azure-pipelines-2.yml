@@ -17,6 +17,9 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  Image_tag: '$(Build.BuildId)'
+
 steps:
 
 - task: Bash@3
@@ -26,6 +29,7 @@ steps:
     script: |
       # Set the imageTag to today's date
       imageTag=$(date +"%Y%m%d")
+      echo "##vso[task.setvariable variable=Image_tag]$imageTag"
 
 - task: replacetokens@5
   inputs:
@@ -38,4 +42,20 @@ steps:
     keepToken: false
     actionOnNoFiles: 'continue'
     enableTransforms: false
-   
+    enableRecursion: false
+    useLegacyPattern: false
+    enableTelemetry: true
+
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'Saitejak8serviceconnection'
+    namespace: 'default'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: 'Deployment_files/deployment.yaml'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
+    azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
+    secretName: 'saitejak8secret'
