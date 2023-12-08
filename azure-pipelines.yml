@@ -33,13 +33,13 @@ stages:
       displayName: 'Set Date'
       inputs:
         targetType: 'inline'
-        script: 'export now=$(date)'
+        script: 'export now=$(date +"%Y%m%d")'
 
     - task: Docker@2
       displayName: 'Build and push an image to container registry'
       inputs:
         containerRegistry: 'saitejacontainerregistry'
-        repository: 'saitejaproject'
+        repository: 'saitejacontainerregistry.azurecr.io/saitejaproject'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(now)'
