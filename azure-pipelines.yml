@@ -39,7 +39,7 @@ stages:
       displayName: 'Build and push an image to container registry'
       inputs:
         containerRegistry: 'saitejacontainerregistry'
-        repository: 'saitejacontainerregistry.azurecr.io/saitejaproject'
+        repository: '$(imageRepository)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(now)'
