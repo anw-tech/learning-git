@@ -33,7 +33,7 @@ stages:
       displayName: 'Set Date'
       inputs:
         targetType: 'inline'
-        script: 'export now=$(date +"%Y%m%d")'
+        script: 'now=$(date)'
 
     - task: Docker@2
       displayName: 'Build and push an image to container registry'
