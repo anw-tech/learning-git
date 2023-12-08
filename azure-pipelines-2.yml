@@ -1,18 +1,3 @@
-stages:
-- stage: A
-  jobs:
-  - job: A1
-    steps:
-     - bash: echo "##vso[task.setvariable variable=myStageVal;isOutput=true]this is a stage output variable"
-       name: MyOutputVar
-
-- stage: B
-  dependsOn: A
-  jobs:
-  - job: B1
-    variables:
-      myStageAVar: $[stageDependencies.A.A1.outputs['MyOutputVar.myStageVal']]
-
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
@@ -33,18 +18,18 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  imageTag: $[stageDependencies.B.B1.variables['myStageAVar']]
+  Image_tag: '$(Build.BuildId)'
 
 steps:
 
 - task: Bash@3
-  displayName: 'Set Image Tag and Deploy'
+  displayName: 'Set Image Tag'
   inputs:
     targetType: 'inline'
     script: |
-      # Set the imageTag to today's date
-      imageTag=$(date +"%Y%m%d")
-      echo "##vso[task.setvariable variable=imageTag]$imageTag"
+      # Set the Image_tag to today's date
+      Image_tag=$(date +"%Y%m%d")
+      echo "##vso[task.setvariable variable=Image_tag]$Image_tag"
 
 - task: replacetokens@5
   inputs:
@@ -57,3 +42,20 @@ steps:
     keepToken: false
     actionOnNoFiles: 'continue'
     enableTransforms: false
+    enableRecursion: false
+    useLegacyPattern: false
+    enableTelemetry: true
+
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'Saitejak8serviceconnection'
+    namespace: 'default'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: 'Deployment_files/deployment.yaml'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
+    azureContainerRegistry: 'saitejacontainerregistry.azurecr.io'
+    secretName: 'saitejak8secret'
