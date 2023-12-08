@@ -37,11 +37,4 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: '$(Tag)'
-
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Free Trial(7338b8ab-3b46-420e-becc-da044eebe12c)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript:  imageTag = az acr repository show-tags -n Saitejacontainerregistry --repository saitejaproject --top 1
+        tags: '$(Build.BuildID)'
