@@ -1,7 +1,3 @@
-# Docker
-# Build and push an image to Azure Container Registry
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 name: First-pipeline
 
 trigger:
@@ -12,19 +8,19 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'ca610e97-31ce-4f38-ab86-ec029b71eef6'
-  imageRepository: 'saitejaproject'
+  dockerRegistryServiceConnection: 'ca610e97-31ce-4f38-ab86-ec029b71eef6' 
+  imageRepository: 'saitejaproject'     
   containerRegistry: 'saitejacontainerregistry.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile' 
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  displayName: Build and push stage
+- stage: Build  
+  displayName: Build and push stage  
   jobs:
-  - job: Build
+  - job: Build 
     displayName: Build
     pool:
       vmImage: $(vmImageName)
@@ -33,16 +29,15 @@ stages:
       displayName: 'Set Date'
       inputs:
         targetType: 'inline'
-        script: 
-        - now:(date +%y%m%d)
+        script: |
+          now=$(date +%y%m%d)
           echo $now
-
 
     - task: Docker@2
       displayName: 'Build and push an image to container registry'
       inputs:
-        containerRegistry: 'saitejacontainerregistry'
-        repository: '$(imageRepository)'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: '$(now)'
+        containerRegistry: $(dockerRegistryServiceConnection)
+        repository: $(imageRepository)   
+        command: 'buildAndPush' 
+        Dockerfile: $(dockerfilePath)
+        tags: '$now'
