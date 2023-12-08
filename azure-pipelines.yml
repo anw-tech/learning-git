@@ -17,13 +17,13 @@ variables:
   containerRegistry: 'saitejacontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
 
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: 'now=$(date)'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
