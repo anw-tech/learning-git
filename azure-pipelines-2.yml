@@ -24,14 +24,6 @@ pool:
 
 steps:
 
-#- task: Docker@2
- #inputs:
-  #containerRegistry: 'saitejacontainerregistry'
-   # repository: 'Saitejaproject'
-    #command: 'pull'
-    #Dockerfile: '**/Dockerfile'
-    #tags: '$(imageTag)' 
-
 - task: replacetokens@5
   inputs:
     rootDirectory: 'Deployment_files'
