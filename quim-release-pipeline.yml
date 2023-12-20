@@ -4,7 +4,7 @@ trigger:
 resources:
   pipelines:
   - pipeline: releasebuild  # Name of the pipeline resource
-    source: azure-repo-springboot-build # Name of the triggering pipeline made some changes
+    source: anw-tech-learning-git-build-pipeline # Name of the triggering pipeline made some changes
     trigger: 
       branches:
       - master
