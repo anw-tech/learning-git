@@ -9,7 +9,7 @@ variables:
   currentDate: $(date +%Y%m%d)
   currentTime: $(date +%H%M%S)
 
-#stages:
+stages:
 #- stage: sonar
   #displayName: 'sonar code analysis'
   #jobs:
