@@ -78,11 +78,10 @@ stages:
               inputs:
                 buildType: 'specific'
                 project: '407edc9b-7dae-4ac2-803e-d87c0db9307c'
-                pipeline: '24'
+                pipeline: '29'
                 specificBuildWithTriggering: true
                 buildVersionToDownload: 'latest'
                 downloadType: 'specific'
-                itemPattern: '**'
                 downloadPath: '$(System.ArtifactsDirectory)'
                 cleanDestinationFolder: true
 
@@ -133,11 +132,10 @@ stages:
               inputs:
                 buildType: 'specific'
                 project: '407edc9b-7dae-4ac2-803e-d87c0db9307c'
-                pipeline: '24'
+                pipeline: '29'
                 specificBuildWithTriggering: true
                 buildVersionToDownload: 'latest'
                 downloadType: 'specific'
-                itemPattern: '**'
                 downloadPath: '$(System.ArtifactsDirectory)'
                 cleanDestinationFolder: true
             
