@@ -25,7 +25,7 @@ git commit
 git clone
 git pull 
 git push
-git remote add
+git remote add origin
 etc.
 ````
 
