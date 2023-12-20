@@ -9,13 +9,13 @@ variables:
   currentDate: $(date +%Y%m%d)
   currentTime: $(date +%H%M%S)
 
-stages:
-- stage: sonar
-  displayName: 'sonar code analysis'
-  jobs:
-  - job: sonarJob
-    pool: sonar-selfhost-agent
-    steps:
+#stages:
+#- stage: sonar
+  #displayName: 'sonar code analysis'
+  #jobs:
+  #- job: sonarJob
+    #pool: sonar-selfhost-agent
+    #steps:
     #- task: SonarQubePrepare@5
     #  inputs:
     #    SonarQube: 'sonar-mvn-conection'
