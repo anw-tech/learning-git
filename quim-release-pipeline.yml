@@ -7,7 +7,7 @@ resources:
     source: anw-tech-learning-git-build-pipeline # Name of the triggering pipeline made some changes
     trigger: 
       branches:
-      - master
+      - skmdm
 
 # pool: myagentpool
 #  vmImage: 'ubuntu-latest'
