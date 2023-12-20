@@ -1,5 +1,5 @@
 trigger:
-- master
+- skmdm
 
 #pool: myagentpool
 #  vmImage: 'ubuntu-latest'
