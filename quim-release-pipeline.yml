@@ -1,13 +1,13 @@
-trigger:
-- none
 
 resources:
   pipelines:
-  - pipeline: releasebuild  # Name of the pipeline resource
-    source: anw-tech-learning-git-build-pipeline # Name of the triggering pipeline made some changes
+  - pipeline: build
+    source: anw-tech-learning-git-build-pipeline
     trigger: 
       branches:
-      - skmdm
+        include: 
+        - skmdm
+
 
 # pool: myagentpool
 #  vmImage: 'ubuntu-latest'
