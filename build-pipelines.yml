@@ -41,3 +41,11 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'docker-image'
         publishLocation: 'Container'
+
+# extras #
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'docker-image'
+        publishLocation: 'Container'
