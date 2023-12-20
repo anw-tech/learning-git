@@ -24,11 +24,10 @@ stages:
       inputs:
         buildType: 'specific'
         project: '407edc9b-7dae-4ac2-803e-d87c0db9307c'
-        pipeline: '24'
+        pipeline: '29'
         specificBuildWithTriggering: true
         buildVersionToDownload: 'latest'
         downloadType: 'specific'
-        itemPattern: '**'
         downloadPath: '$(System.ArtifactsDirectory)'
         cleanDestinationFolder: true
 
@@ -37,7 +36,7 @@ stages:
         targetType: 'inline'
         script: |
           az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
-          imagetag_file=$(cat $(System.ArtifactsDirectory)/imageTag.txt)
+          imagetag_file=$(cat $(System.ArtifactsDirectory)/image-tag/imageTag.txt)
           echo "##vso[task.setvariable variable=imagetag_file]$imagetag_file"
           docker pull mvnrepo.azurecr.io/mvn-spring:$imagetag_file
           docker tag mvnrepo.azurecr.io/mvn-spring:$imagetag_file mvnrepo.azurecr.io/mvn-spring:dev-$imagetag_file
