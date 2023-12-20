@@ -37,7 +37,7 @@ stages:
         targetType: 'inline'
         script: |
           az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
-          imagetag_file=$(cat /home/playground/myagent/_work/12/a/image-tag/imageTag.txt)
+          imagetag_file=$(cat $(System.ArtifactsDirectory)/imageTag.txt)
           echo "##vso[task.setvariable variable=imagetag_file]$imagetag_file"
           docker pull mvnrepo.azurecr.io/mvn-spring:$imagetag_file
           docker tag mvnrepo.azurecr.io/mvn-spring:$imagetag_file mvnrepo.azurecr.io/mvn-spring:dev-$imagetag_file
