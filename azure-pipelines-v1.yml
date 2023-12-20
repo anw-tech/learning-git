@@ -1,0 +1,49 @@
+trigger:
+- main
+
+pool: myagentpool
+
+stages:
+- stage: Build
+  displayName: 'Maven Build docker build'
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'package -DskipTests'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+    - script: |
+        docker build -t mvn-myapp:$(Build.BuildId) .
+
+- stage: Dev
+  displayName: 'Dev Retaging'
+  jobs:
+  - job: DevJob
+    steps: 
+    - script: |
+        docker tag mvn-myapp:$(Build.BuildId) mvnrepo.azurecr.io/spring-dev/mvn-myapp:$(Build.BuildId)-dev
+        docker push mvnrepo.azurecr.io/spring-dev/mvn-myapp:$(Build.BuildId)-dev
+
+- stage: QA
+  displayName: 'QA Retaging'
+  jobs:
+  - job: QAJob
+    steps: 
+    - script: |
+        docker tag mvn-myapp:$(Build.BuildId) mvn-myapp:$(Build.BuildId)-qa
+
+- stage: Live
+  displayName: 'Live Retaging'
+  jobs:
+  - job: LiveJob
+    steps: 
+    - script: |
+        docker tag mvn-myapp:$(Build.BuildId) mvn-myapp:$(Build.BuildId)-live
+    

@@ -1,0 +1,113 @@
+trigger:
+- none
+
+resources:
+  pipelines:
+  - pipeline: releasebuild  # Name of the pipeline resource
+    source: azure-repo-springboot-build # Name of the triggering pipeline made some changes
+    trigger: 
+      branches:
+      - master
+
+pool: 
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Dev
+  displayName: 'Dev Retaging'
+  jobs:
+  - job: DevJob
+    steps: 
+    - script: |
+        az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
+        docker pull mvnrepo.azurecr.io/mvn-spring:testv1
+        docker tag mvnrepo.azurecr.io/mvn-spring:testv1 mvnrepo.azurecr.io/mvn-spring:dev
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'mvnrepo'
+        repository: 'mvn-spring'
+        command: 'push'
+        tags: 'dev'
+
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscriptionEndpoint: 'tomyportal'
+        azureResourceGroup: 'cicd-mvn'
+        kubernetesCluster: 'mvn-spring'
+        namespace: 'dev'
+        command: 'apply'
+        useConfigurationFile: true
+        configuration: 'minikube-test1/deployment-dev.yml'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
+        azureSubscriptionEndpointForSecrets: 'tomyportal'
+        azureContainerRegistry: 'mvnrepo.azurecr.io'
+        secretName: 'secretpull'
+
+
+- stage: QA
+  displayName: 'QA Retaging'
+  jobs:
+  - job: QAJob
+    steps: 
+    - script: |
+        az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
+        docker pull mvnrepo.azurecr.io/mvn-spring:testv1
+        docker tag mvnrepo.azurecr.io/mvn-spring:testv1 mvnrepo.azurecr.io/mvn-spring:qa
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'mvnrepo'
+        repository: 'mvn-spring'
+        command: 'push'
+        tags: 'qa'
+
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscriptionEndpoint: 'tomyportal'
+        azureResourceGroup: 'cicd-mvn'
+        kubernetesCluster: 'mvn-spring'
+        namespace: 'qa'
+        command: 'apply'
+        useConfigurationFile: true
+        configuration: 'minikube-test1/deployment-qa.yml'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
+        azureSubscriptionEndpointForSecrets: 'tomyportal'
+        azureContainerRegistry: 'mvnrepo.azurecr.io'
+        secretName: 'secretpull'
+
+
+- stage: Live
+  displayName: 'Live Retaging'
+  jobs:
+  - job: LiveJob
+    steps: 
+    - script: |
+        az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
+        docker pull mvnrepo.azurecr.io/mvn-spring:testv1
+        docker tag mvnrepo.azurecr.io/mvn-spring:testv1 mvnrepo.azurecr.io/mvn-spring:live
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'mvnrepo'
+        repository: 'mvn-spring'
+        command: 'push'
+        tags: 'live'
+
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscriptionEndpoint: 'tomyportal'
+        azureResourceGroup: 'cicd-mvn'
+        kubernetesCluster: 'mvn-spring'
+        namespace: 'live'
+        command: 'apply'
+        useConfigurationFile: true
+        configuration: 'minikube-test1/deployment-live.yml'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
+        azureSubscriptionEndpointForSecrets: 'tomyportal'
+        azureContainerRegistry: 'mvnrepo.azurecr.io'
+        secretName: 'secretpull'
+

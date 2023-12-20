@@ -1,0 +1,19 @@
+trigger:
+- master
+
+pool: myagentpool
+
+steps:
+
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    azureSubscription: tomyportal
+    azureContainerRegistry: '{"loginServer":"mvnrepo.azurecr.io", "id" : "/subscriptions/7338b8ab-3b46-420e-becc-da044eebe12c/resourceGroups/cicd-mvn/providers/Microsoft.ContainerRegistry/registries/mvnrepo"}'
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    azureSubscription: tomyportal
+    azureContainerRegistry: '{"loginServer":"mvnrepo.azurecr.io", "id" : "/subscriptions/7338b8ab-3b46-420e-becc-da044eebe12c/resourceGroups/cicd-mvn/providers/Microsoft.ContainerRegistry/registries/mvnrepo"}'
+    action: 'Push an image'

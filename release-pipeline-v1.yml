@@ -1,0 +1,63 @@
+trigger:
+- none
+
+resources:
+  pipelines:
+  - pipeline: releasebuild  # Name of the pipeline resource
+    source: skmdmqr-spring-boot-build # Name of the triggering pipeline made some changes
+    trigger: 
+      branches:
+      - master
+
+pool: 
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Dev
+  displayName: 'Dev Retaging'
+  jobs:
+  - job: DevJob
+    steps: 
+    - script: |
+        az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
+        docker pull mvnrepo.azurecr.io/mvn-spring:testv1
+        docker tag mvnrepo.azurecr.io/mvn-spring:testv1 mvnrepo.azurecr.io/mvn-spring:dev
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'mvnrepo'
+        repository: 'mvn-spring'
+        command: 'push'
+        tags: 'dev'
+
+- stage: QA
+  displayName: 'QA Retaging'
+  jobs:
+  - job: QAJob
+    steps: 
+    - script: |
+        az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
+        docker pull mvnrepo.azurecr.io/mvn-spring:testv1
+        docker tag mvnrepo.azurecr.io/mvn-spring:testv1 mvnrepo.azurecr.io/mvn-spring:qa
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'mvnrepo'
+        repository: 'mvn-spring'
+        command: 'push'
+        tags: 'qa'
+
+- stage: Live
+  displayName: 'Live Retaging'
+  jobs:
+  - job: LiveJob
+    steps: 
+    - script: |
+        az acr login -n mvnrepo.azurecr.io --username mvnrepo --password wFzE/+c2VTXgp4bCqZjrBEfJ8bXC/LHNvxGb0z/5+1+ACRDP4yVJ
+        docker pull mvnrepo.azurecr.io/mvn-spring:testv1
+        docker tag mvnrepo.azurecr.io/mvn-spring:testv1 mvnrepo.azurecr.io/mvn-spring:live
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'mvnrepo'
+        repository: 'mvn-spring'
+        command: 'push'
+        tags: 'live'
+
