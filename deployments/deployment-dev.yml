@@ -6,30 +6,29 @@
 #  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7CgkJCSJ1c2VybmFtZSI6ICJza21kbSIsCgkJCSJwYXNzd29yZCI6ICJuZXcxMjN3b3JsZCIsCgkJCSJlbWFpbCI6ICJza21kbXNrQGdtYWlsLmNvbSIsCgkJCSJhdXRoIjogImMydHRaRzA2Ym1WM01USXpkMjl5YkdRPSIKCQl9Cgl9Cn0=
 #type: kubernetes.io/dockerconfigjson
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: spring-ingress-dev
-  namespace: dev
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths:
-      - path: /app1  #(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend-app-services-1
-            port:
-              number: 80
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: spring-ingress-dev
+#  namespace: dev
+#  annotations:
+#    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#    nginx.ingress.kubernetes.io/use-regex: "true"
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#spec:
+#  ingressClassName: nginx
+#  rules:
+#  - http:
+#      paths:
+#      - path: /app1  #(/|$)(.*)
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: frontend-app-services-1
+#            port:
+#              number: 80
 
 ---
-# namespace.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
