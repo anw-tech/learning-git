@@ -1,5 +1,5 @@
-#trigger:
-#- none
+trigger:
+- none
 resources:
   pipelines:
   - pipeline: build
