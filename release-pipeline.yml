@@ -13,7 +13,7 @@
 # pool: myagentpool
 #  vmImage: 'ubuntu-latest'
 
-stages:
+#stages:
 - stage: Dev
   displayName: 'Dev Retaging'
   jobs:
