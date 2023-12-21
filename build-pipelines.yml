@@ -75,8 +75,6 @@ stages:
         ArtifactName: 'image-tag'
         publishLocation: 'Container'
 
-    - script: echo This pipeline runs first and will trigger a second pipeline !
-    - template: release-pipeline.yml
 
 
         
