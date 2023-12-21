@@ -9,7 +9,9 @@ git push
 git remote add origin
 
 
-doing my first changes in the process of learning git 
+doing my first changes in the process of learning git -sameer
+
+
 
 
 
