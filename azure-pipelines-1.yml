@@ -7,7 +7,7 @@ trigger:
 - burhansk
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'burhanuddin-pool'
 
 variables:
   imageName: 'nodejs'
