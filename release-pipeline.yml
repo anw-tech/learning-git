@@ -28,7 +28,7 @@ stages:
       inputs:
         buildType: 'specific'
         project: '407edc9b-7dae-4ac2-803e-d87c0db9307c'
-        pipeline: '29'
+        pipeline: '31'
         specificBuildWithTriggering: true
         buildVersionToDownload: 'latest'
         downloadType: 'specific'
