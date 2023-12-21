@@ -15,20 +15,18 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /app2(/|$)(.*)
+      - path: "/app2(/|$)(.*)"
         pathType: Prefix
         backend:
           service:
             name: frontend-app-services-2
             port:
               number: 80
-
 
 ---
 # namespace.yaml
