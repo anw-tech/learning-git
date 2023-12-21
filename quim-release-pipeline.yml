@@ -9,7 +9,6 @@ resources:
         include: 
         - skmdm
         exclude:
-        - munna
         - skmdm-sub-b1
         - skmdm-sub-b2
 

@@ -3,9 +3,8 @@ trigger:
     include: 
     - skmdm
     exclude:
-    - munna
-    - skmdm-sub-b1
-    - skmdm-sub-b2
+    - skmdm-sub-br1
+    - skmdm-sub-br2
 
 #pool: myagentpool
 #  vmImage: 'ubuntu-latest'
