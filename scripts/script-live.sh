@@ -3,7 +3,7 @@
 #
 # Read the new image tag from the file
 # Define the new image tag
-NEW_IMAGE_TAG="live-$(cat /home/playground/myagent/_work/12/a/image-tag/imageTag.txt)"
+NEW_IMAGE_TAG="live-$(cat /home/playground/myagent/_work/14/a/image-tag/imageTag.txt)"
 
 # Specify the path to your Kubernetes deployment YAML file
 DEPLOYMENT_FILE="/home/playground/myagent/_work/12/s/deployments/deployment-live.yml"
