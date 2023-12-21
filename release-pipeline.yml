@@ -1,16 +1,10 @@
-trigger:
-- none
+trigger: none
+
 resources:
   pipelines:
   - pipeline: build
     source: anw-tech-learning-git-build-pipeline
-    trigger: 
-      branches:
-        include: 
-        - skmdm
-        exclude:
-        - skmdm-sub-b1
-        - skmdm-sub-b2
+    trigger: true
 
 
 # pool: myagentpool
