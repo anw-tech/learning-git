@@ -7,7 +7,8 @@ resources:
     source: anw-tech-learning-git-build-pipeline
     trigger: 
       branches:
-      - skmdm
+        include: 
+        - main/skmdm
 
 
 # pool: myagentpool
