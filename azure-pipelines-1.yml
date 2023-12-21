@@ -2,7 +2,7 @@ trigger:
 - burhansk
 
 pool:
-  vmImage: 'githubrepo-pool'
+  name: githubrepo-pool
 
 variables:
   imageName: 'nodejs'
