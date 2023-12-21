@@ -4,7 +4,9 @@ resources:
   pipelines:
   - pipeline: build
     source: anw-tech-learning-git-build-pipeline
-    trigger: true
+    trigger: 
+      branches:
+      - skmdm
 
 
 # pool: myagentpool
