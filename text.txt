@@ -1,2 +1,3 @@
 bugfix commit1
 bugfix commit 2
+feature commit 1
