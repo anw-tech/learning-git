@@ -1,5 +1,9 @@
 trigger:
-- skmdm
+  branches:
+    include: 
+    - skmdm
+    exclude:
+    - main/*
 
 #pool: myagentpool
 #  vmImage: 'ubuntu-latest'
