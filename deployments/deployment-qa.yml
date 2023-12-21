@@ -20,7 +20,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /app2(/|$)(.*)
+      - path: /app2  #(/|$)(.*)
         pathType: Prefix
         backend:
           service:
