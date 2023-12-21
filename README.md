@@ -10,7 +10,7 @@ THIS REPO IS FOR LEARNING GIT
 ### 1.0.2. What is GIT
 GIT IS A `DISTRIBUTED VERSION CONTROL SYSTEM (VCS)`
 
-In a Distrubuted VCS - local as well remote has complete history of a repo
+In a  Distrubuted VCS - local as well remote has complete history of a repo
 
 
 
