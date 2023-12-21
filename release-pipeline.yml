@@ -1,13 +1,13 @@
-trigger: 
-- none
+#trigger: 
+#- none
 
-resources:
-  pipelines:
-  - pipeline: build
-    source: anw-tech-learning-git-build-pipeline
-    trigger: 
-      branches:
-      - skmdm
+#resources:
+#  pipelines:
+#  - pipeline: build
+#    source: anw-tech-learning-git-build-pipeline
+#    trigger: 
+#      branches:
+#      - skmdm
 
 
 # pool: myagentpool
