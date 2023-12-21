@@ -7,6 +7,8 @@ resources:
       branches:
         include: 
         - skmdm
+        exclude:
+        - main/*
 
 
 # pool: myagentpool
