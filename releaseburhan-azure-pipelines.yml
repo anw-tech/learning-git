@@ -10,7 +10,7 @@ resources:
      - burhansk
 
 pool:
-  vmImage: burhanuddin-pool
+  vmImage: githubrepo-pool
 
 steps:
 - task: DownloadBuildArtifacts@1
@@ -75,6 +75,6 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './script2.sh'
-    addSpnToEnvironment: 
+
   
 
