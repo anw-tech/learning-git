@@ -1,5 +1,3 @@
-trigger:
-- burhansk
 
 pool:
   name: githubrepo-pool
