@@ -10,7 +10,7 @@ resources:
      - burhansk
 
 pool:
-  vmImage: githubrepo-pool
+  name: githubrepo-pool
 
 steps:
 - task: DownloadBuildArtifacts@1
