@@ -30,7 +30,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      docker load -i /home/burhan/myagent/_work/1/a/docker-image/nodejs.tar
+      docker load -i home/burhan/myagent/_work/2/a/docker-image/nodejs.tar
 
 - task: Bash@3
   inputs:
