@@ -25,7 +25,7 @@ git commit
 git clone
 git pull 
 git push
-git remote add
+git remote add 
 etc.
 ````
 
@@ -36,4 +36,4 @@ etc.
 3) [BIT BUCKET](https://bitbucket.org)
 4) [Azure REPO](https://azure.microsoft.com/en-gb/products/devops/repos)
 
-
+testing branch protection rules
